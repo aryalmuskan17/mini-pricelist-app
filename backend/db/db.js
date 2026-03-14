@@ -1,11 +1,15 @@
-const { Pool } = require("pg");
+const { Pool } = require("pg")
 
 const pool = new Pool({
-  user: "aryalmuskan17",
-  host: "localhost",
-  database: "mini_pricelist",
-  password: "",
-  port: 5432,
-});
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "aryalmuskan17",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "mini_pricelist",
+  port: process.env.DB_PORT || 5432,
 
-module.exports = pool;
+  ssl: process.env.DB_HOST
+    ? { rejectUnauthorized: false }
+    : false
+})
+
+module.exports = pool
