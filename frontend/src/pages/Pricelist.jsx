@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getProducts, updateProduct } from "../services/api"
+import "../styles/pricelist.css"
 
 function Pricelist() {
 
@@ -32,109 +33,113 @@ function Pricelist() {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="pricelist-container">
 
-      <h2>Pricelist</h2>
+  <h2>Pricelist</h2>
 
-      <table border="1" width="100%">
+  <div className="table-wrapper">
 
-        <thead>
-          <tr>
-            <th>Article No</th>
-            <th>Product / Service</th>
-            <th>In Price</th>
-            <th>Price</th>
-            <th>Unit</th>
-            <th>In Stock</th>
-            <th>Description</th>
-            <th>Save</th>
-          </tr>
-        </thead>
+    <table>
 
-        <tbody>
+      <thead>
+        <tr>
+          <th>Article No</th>
+          <th>Product / Service</th>
+          <th>In Price</th>
+          <th>Price</th>
+          <th>Unit</th>
+          <th>In Stock</th>
+          <th>Description</th>
+          <th>Save</th>
+        </tr>
+      </thead>
 
-          {Array.isArray(products) && products.map((product, index) => (
+      <tbody>
 
-            <tr key={product.id}>
+        {Array.isArray(products) && products.map((product, index) => (
 
-              <td>
-                <input
-                  value={product.article_no}
-                  onChange={(e) =>
-                    handleChange(index, "article_no", e.target.value)
-                  }
-                />
-              </td>
+          <tr key={product.id}>
 
-              <td>
-                <input
-                  value={product.product_service}
-                  onChange={(e) =>
-                    handleChange(index, "product_service", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.article_no}
+      onChange={(e) =>
+        handleChange(index, "article_no", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <input
-                  value={product.in_price}
-                  onChange={(e) =>
-                    handleChange(index, "in_price", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.product_service}
+      onChange={(e) =>
+        handleChange(index, "product_service", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <input
-                  value={product.price}
-                  onChange={(e) =>
-                    handleChange(index, "price", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.in_price}
+      onChange={(e) =>
+        handleChange(index, "in_price", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <input
-                  value={product.unit}
-                  onChange={(e) =>
-                    handleChange(index, "unit", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.price}
+      onChange={(e) =>
+        handleChange(index, "price", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <input
-                  value={product.in_stock}
-                  onChange={(e) =>
-                    handleChange(index, "in_stock", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.unit}
+      onChange={(e) =>
+        handleChange(index, "unit", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <input
-                  value={product.description}
-                  onChange={(e) =>
-                    handleChange(index, "description", e.target.value)
-                  }
-                />
-              </td>
+  <td>
+    <input
+      value={product.in_stock}
+      onChange={(e) =>
+        handleChange(index, "in_stock", e.target.value)
+      }
+    />
+  </td>
 
-              <td>
-                <button onClick={() => saveProduct(product)}>
-                  Save
-                </button>
-              </td>
+  <td>
+    <input
+      value={product.description}
+      onChange={(e) =>
+        handleChange(index, "description", e.target.value)
+      }
+    />
+  </td>
 
-            </tr>
+  <td>
+    <button onClick={() => saveProduct(product)}>
+      Save
+    </button>
+  </td>
 
-          ))}
+</tr>
 
-        </tbody>
+        ))}
 
-      </table>
+      </tbody>
 
-    </div>
+    </table>
+
+  </div>
+
+</div>
   )
 }
 

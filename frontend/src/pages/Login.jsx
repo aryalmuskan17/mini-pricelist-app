@@ -4,6 +4,8 @@ import { getTranslations, login } from "../services/api"
 
 function Login() {
 
+  const [menuOpen, setMenuOpen] = useState(false)
+
   const [lang, setLang] = useState("en")
   const [texts, setTexts] = useState({})
 
@@ -38,6 +40,18 @@ function Login() {
 
   return (
     <div className="login-container">
+
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
+
+      {menuOpen && (
+        <div className="menu">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+      )}
 
       <div className="login-box">
 
