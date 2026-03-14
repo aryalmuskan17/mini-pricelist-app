@@ -149,3 +149,13 @@ td button:hover{
   }
 
 }
+
+.search-bar{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.search-bar input{
+  width:250px;
+}

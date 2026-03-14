@@ -21,6 +21,10 @@ function Pricelist() {
     save: "Save"
   })
 
+  /* SEARCH STATES */
+  const [searchArticle, setSearchArticle] = useState("")
+  const [searchProduct, setSearchProduct] = useState("")
+
   useEffect(() => {
     loadProducts()
   }, [])
@@ -51,6 +55,20 @@ function Pricelist() {
     setTexts(prev => ({ ...prev, ...map }))
   }
 
+  /* FILTER PRODUCTS */
+  const filteredProducts = products.filter((p) => {
+
+    const articleMatch = p.article_no
+      .toLowerCase()
+      .includes(searchArticle.toLowerCase())
+
+    const productMatch = p.product_service
+      .toLowerCase()
+      .includes(searchProduct.toLowerCase())
+
+    return articleMatch && productMatch
+  })
+
   const handleChange = (index, field, value) => {
     const updated = [...products]
     updated[index][field] = value
@@ -70,6 +88,7 @@ function Pricelist() {
   return (
     <div className="pricelist-page">
 
+      {/* TOPBAR */}
       <div className="topbar">
 
         <div className="left-nav" onClick={() => setMenuOpen(!menuOpen)}>
@@ -100,6 +119,7 @@ function Pricelist() {
 
       </div>
 
+      {/* SIDEBAR */}
       {menuOpen && (
         <div className="sidebar">
           <p>Invoices</p>
@@ -114,6 +134,23 @@ function Pricelist() {
       <div className="content">
 
         <h2>{texts.pricelist}</h2>
+
+        {/* SEARCH BAR */}
+        <div className="search-bar">
+
+          <input
+            placeholder="Search Article No"
+            value={searchArticle}
+            onChange={(e) => setSearchArticle(e.target.value)}
+          />
+
+          <input
+            placeholder="Search Product"
+            value={searchProduct}
+            onChange={(e) => setSearchProduct(e.target.value)}
+          />
+
+        </div>
 
         <div className="table-wrapper">
 
@@ -134,7 +171,7 @@ function Pricelist() {
 
             <tbody>
 
-              {products.map((product, index) => (
+              {filteredProducts.map((product, index) => (
 
                 <tr key={product.id}>
 
