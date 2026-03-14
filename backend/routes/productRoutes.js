@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
+const authenticateToken = require("../middleware/authMiddleware")
 
-router.get("/products", async (req, res) => {
+router.get("/products", authenticateToken, async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM products ORDER BY id");
     res.json(result.rows);
@@ -12,7 +13,7 @@ router.get("/products", async (req, res) => {
   }
 });
 
-router.put("/products/:id", async (req, res) => {
+router.put("/products/:id", authenticateToken, async (req, res) => {
   const { id } = req.params;
   const {
     article_no,

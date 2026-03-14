@@ -10,9 +10,15 @@ function Pricelist() {
   }, [])
 
   const loadProducts = async () => {
-    const data = await getProducts()
+  const data = await getProducts()
+
+  if (Array.isArray(data)) {
     setProducts(data)
+  } else {
+    console.log("API error:", data)
+    setProducts([])
   }
+}
 
   const handleChange = (index, field, value) => {
     const updated = [...products]
@@ -47,7 +53,7 @@ function Pricelist() {
 
         <tbody>
 
-          {products.map((product, index) => (
+          {Array.isArray(products) && products.map((product, index) => (
 
             <tr key={product.id}>
 
