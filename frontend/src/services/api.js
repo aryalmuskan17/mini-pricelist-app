@@ -1,4 +1,4 @@
-const API_BASE = "https://mini-pricelist-backend.onrender.com/api"
+const API_BASE = import.meta.env.VITE_API_URL
 
 export const getTranslations = async (lang) => {
   const response = await fetch(`${API_BASE}/translations/${lang}`)
