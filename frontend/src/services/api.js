@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5001/api"
+const API_BASE = "https://mini-pricelist-backend.onrender.com/api"
 
 export const getTranslations = async (lang) => {
   const response = await fetch(`${API_BASE}/translations/${lang}`)
@@ -20,7 +20,7 @@ export const login = async (email, password) => {
 export const getProducts = async () => {
   const token = localStorage.getItem("token")
 
-  const response = await fetch("http://localhost:5001/api/products", {
+  const response = await fetch(`${API_BASE}/products`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -32,7 +32,7 @@ export const getProducts = async () => {
 export const updateProduct = async (id, product) => {
   const token = localStorage.getItem("token")
 
-  const response = await fetch(`http://localhost:5001/api/products/${id}`, {
+  const response = await fetch(`${API_BASE}/products/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
