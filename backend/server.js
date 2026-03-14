@@ -3,13 +3,17 @@ const cors = require("cors");
 require("dotenv").config();
 
 const pool = require("./db/db");
+const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
+const translationRoutes = require("./routes/translationRoutes");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api", productRoutes);
 app.use("/api", authRoutes);
+app.use("/api", translationRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Mini Pricelist API running" });
