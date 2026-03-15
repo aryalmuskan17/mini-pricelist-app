@@ -5,8 +5,6 @@ import "../styles/pricelist.css"
 function Pricelist() {
 
   const [products, setProducts] = useState([])
-  const [menuOpen, setMenuOpen] = useState(false)
-
   const [lang, setLang] = useState("en")
 
   const [texts, setTexts] = useState({
@@ -85,29 +83,42 @@ function Pricelist() {
   }
 
   return (
-    <div className="pricelist-page">
 
-      {/* TOPBAR */}
+    <div className="page">
+
+      {/* TOP BAR */}
 
       <div className="topbar">
 
-        <div className="left-nav" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
+        <div className="user-info">
+
+          <img
+            className="avatar"
+            src="https://storage.123fakturera.se/public/icons/diamond.png"
+          />
+
+          <div className="user-text">
+            <div className="user-name">John Andre</div>
+            <div className="company-name">Storfjord AS</div>
+          </div>
+
         </div>
 
         <div className="right-nav">
 
-          <span>{lang === "en" ? "English" : "Swedish"}</span>
+          <span className="language-text">
+            {lang === "en" ? "English" : "Norsk Bokmål"}
+          </span>
 
           <img
             src="https://storage.123fakturere.no/public/flags/GB.png"
-            width="24"
+            width="22"
             onClick={() => setLang("en")}
           />
 
           <img
             src="https://storage.123fakturere.no/public/flags/SE.png"
-            width="24"
+            width="22"
             onClick={() => setLang("sv")}
           />
 
@@ -119,137 +130,158 @@ function Pricelist() {
 
       </div>
 
-      {/* SIDEBAR */}
+      {/* MAIN LAYOUT */}
 
-      {menuOpen && (
+      <div className="layout">
+
+        {/* SIDEBAR */}
+
         <div className="sidebar">
-          <p>Invoices</p>
-          <p>Customers</p>
-          <p>My Business</p>
-          <p>Invoice Journal</p>
-          <p>Price List</p>
-          <p>Import / Export</p>
-        </div>
-      )}
 
-      <div className="content">
+          <div className="sidebar-title">Menu</div>
 
-        <h2>{texts.pricelist}</h2>
-
-        {/* SEARCH */}
-
-        <div className="search-bar">
-
-          <input
-            placeholder="Search Article No"
-            value={searchArticle}
-            onChange={(e) => setSearchArticle(e.target.value)}
-          />
-
-          <input
-            placeholder="Search Product"
-            value={searchProduct}
-            onChange={(e) => setSearchProduct(e.target.value)}
-          />
+          <div className="sidebar-item">📄 Invoices</div>
+          <div className="sidebar-item">👤 Customers</div>
+          <div className="sidebar-item">⚙️ My Business</div>
+          <div className="sidebar-item">📚 Invoice Journal</div>
+          <div className="sidebar-item active">🏷 Price List</div>
+          <div className="sidebar-item">📦 Import / Export</div>
+          <div className="sidebar-item">🚪 Log out</div>
 
         </div>
 
-        {/* TABLE */}
+        {/* MAIN CONTENT */}
 
-        <div className="table-wrapper">
+        <div className="main">
 
-          <table>
+          <div className="content">
 
-            <thead>
+            <h2>{texts.pricelist}</h2>
 
-              <tr>
-                <th>{texts.article_no}</th>
-                <th>{texts.product_service}</th>
-                <th>{texts.in_price}</th>
-                <th>{texts.price}</th>
-                <th>{texts.unit}</th>
-                <th>{texts.in_stock}</th>
-                <th>{texts.description}</th>
-              </tr>
+            <div className="toolbar">
 
-            </thead>
+              <div className="toolbar-left">
 
-            <tbody>
+                <button className="action-btn">+ New Product</button>
+                <button className="action-btn">🖨 Print List</button>
+                <button className="action-btn">⚙ Advanced Mode</button>
 
-              {filteredProducts.map((product, index) => (
+              </div>
 
-                <tr key={product.id}>
+              <div className="toolbar-right">
 
-                  <td>
-                    <input
-                      value={product.article_no}
-                      onChange={(e) =>
-                        handleChange(index, "article_no", e.target.value)
-                      }
-                    />
-                  </td>
+                <input
+                  placeholder="Search Article No"
+                  value={searchArticle}
+                  onChange={(e) => setSearchArticle(e.target.value)}
+                />
 
-                  <td>
-                    <input
-                      value={product.product_service}
-                      onChange={(e) =>
-                        handleChange(index, "product_service", e.target.value)
-                      }
-                    />
-                  </td>
+                <input
+                  placeholder="Search Product"
+                  value={searchProduct}
+                  onChange={(e) => setSearchProduct(e.target.value)}
+                />
 
-                  <td>
-                    <input
-                      value={product.in_price}
-                      onChange={(e) =>
-                        handleChange(index, "in_price", e.target.value)
-                      }
-                    />
-                  </td>
+              </div>
 
-                  <td>
-                    <input
-                      value={product.price}
-                      onChange={(e) =>
-                        handleChange(index, "price", e.target.value)
-                      }
-                    />
-                  </td>
+            </div>
 
-                  <td>
-                    <input
-                      value={product.unit}
-                      onChange={(e) =>
-                        handleChange(index, "unit", e.target.value)
-                      }
-                    />
-                  </td>
+            <div className="table-wrapper">
 
-                  <td>
-                    <input
-                      value={product.in_stock}
-                      onChange={(e) =>
-                        handleChange(index, "in_stock", e.target.value)
-                      }
-                    />
-                  </td>
+              <table>
 
-                  <td>
-                    <input
-                      value={product.description}
-                      onChange={(e) =>
-                        handleChange(index, "description", e.target.value)
-                      }
-                    />
-                  </td>
+                <thead>
+                  <tr>
+                    <th>{texts.article_no}</th>
+                    <th>{texts.product_service}</th>
+                    <th>{texts.in_price}</th>
+                    <th>{texts.price}</th>
+                    <th>{texts.unit}</th>
+                    <th>{texts.in_stock}</th>
+                    <th>{texts.description}</th>
+                  </tr>
+                </thead>
 
-                </tr>
+                <tbody>
 
-              ))}
+                  {filteredProducts.map((product, index) => (
 
-            </tbody>
+                    <tr key={product.id}>
 
-          </table>
+                      <td>
+                        <input
+                          value={product.article_no}
+                          onChange={(e) =>
+                            handleChange(index, "article_no", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.product_service}
+                          onChange={(e) =>
+                            handleChange(index, "product_service", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.in_price}
+                          onChange={(e) =>
+                            handleChange(index, "in_price", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.price}
+                          onChange={(e) =>
+                            handleChange(index, "price", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.unit}
+                          onChange={(e) =>
+                            handleChange(index, "unit", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.in_stock}
+                          onChange={(e) =>
+                            handleChange(index, "in_stock", e.target.value)
+                          }
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          value={product.description}
+                          onChange={(e) =>
+                            handleChange(index, "description", e.target.value)
+                          }
+                        />
+                      </td>
+
+                    </tr>
+
+                  ))}
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
 
         </div>
 
