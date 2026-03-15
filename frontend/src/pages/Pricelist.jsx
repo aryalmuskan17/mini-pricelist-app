@@ -17,11 +17,9 @@ function Pricelist() {
     price: "Price",
     unit: "Unit",
     in_stock: "In Stock",
-    description: "Description",
-    save: "Save"
+    description: "Description"
   })
 
-  /* SEARCH STATES */
   const [searchArticle, setSearchArticle] = useState("")
   const [searchProduct, setSearchProduct] = useState("")
 
@@ -55,7 +53,6 @@ function Pricelist() {
     setTexts(prev => ({ ...prev, ...map }))
   }
 
-  /* FILTER PRODUCTS */
   const filteredProducts = products.filter((p) => {
 
     const articleMatch = p.article_no
@@ -69,15 +66,17 @@ function Pricelist() {
     return articleMatch && productMatch
   })
 
-  const handleChange = (index, field, value) => {
+  const handleChange = async (index, field, value) => {
+
     const updated = [...products]
     updated[index][field] = value
     setProducts(updated)
-  }
 
-  const saveProduct = async (product) => {
-    await updateProduct(product.id, product)
-    alert("Saved")
+    try {
+      await updateProduct(updated[index].id, updated[index])
+    } catch (err) {
+      console.error("Auto save failed:", err)
+    }
   }
 
   const handleLogout = () => {
@@ -89,6 +88,7 @@ function Pricelist() {
     <div className="pricelist-page">
 
       {/* TOPBAR */}
+
       <div className="topbar">
 
         <div className="left-nav" onClick={() => setMenuOpen(!menuOpen)}>
@@ -120,6 +120,7 @@ function Pricelist() {
       </div>
 
       {/* SIDEBAR */}
+
       {menuOpen && (
         <div className="sidebar">
           <p>Invoices</p>
@@ -135,7 +136,8 @@ function Pricelist() {
 
         <h2>{texts.pricelist}</h2>
 
-        {/* SEARCH BAR */}
+        {/* SEARCH */}
+
         <div className="search-bar">
 
           <input
@@ -152,11 +154,14 @@ function Pricelist() {
 
         </div>
 
+        {/* TABLE */}
+
         <div className="table-wrapper">
 
           <table>
 
             <thead>
+
               <tr>
                 <th>{texts.article_no}</th>
                 <th>{texts.product_service}</th>
@@ -165,8 +170,8 @@ function Pricelist() {
                 <th>{texts.unit}</th>
                 <th>{texts.in_stock}</th>
                 <th>{texts.description}</th>
-                <th>{texts.save}</th>
               </tr>
+
             </thead>
 
             <tbody>
@@ -236,12 +241,6 @@ function Pricelist() {
                         handleChange(index, "description", e.target.value)
                       }
                     />
-                  </td>
-
-                  <td>
-                    <button onClick={() => saveProduct(product)}>
-                      {texts.save}
-                    </button>
                   </td>
 
                 </tr>
