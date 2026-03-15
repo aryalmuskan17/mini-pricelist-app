@@ -86,8 +86,6 @@ function Pricelist() {
 
     <div className="page">
 
-      {/* TOP BAR */}
-
       <div className="topbar">
 
         <div className="user-info">
@@ -130,11 +128,7 @@ function Pricelist() {
 
       </div>
 
-      {/* MAIN LAYOUT */}
-
       <div className="layout">
-
-        {/* SIDEBAR */}
 
         <div className="sidebar">
 
@@ -149,8 +143,6 @@ function Pricelist() {
           <div className="sidebar-item">🚪 Log out</div>
 
         </div>
-
-        {/* MAIN CONTENT */}
 
         <div className="main">
 

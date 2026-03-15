@@ -4,15 +4,11 @@ body {
   background: #f3f6f9;
 }
 
-/* PAGE STRUCTURE */
-
 .page {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
-
-/* TOPBAR */
 
 .topbar {
   height: 60px;
@@ -23,8 +19,6 @@ body {
   justify-content: space-between;
   padding: 0 25px;
 }
-
-/* USER INFO */
 
 .user-info {
   display: flex;
@@ -52,8 +46,6 @@ body {
   opacity: 0.9;
 }
 
-/* RIGHT NAV */
-
 .right-nav {
   display: flex;
   align-items: center;
@@ -63,8 +55,6 @@ body {
 .language-text {
   font-size: 13px;
 }
-
-/* LOGOUT BUTTON */
 
 .logout-btn {
   background: white;
@@ -81,14 +71,10 @@ body {
   background: #e9f2fb;
 }
 
-/* MAIN LAYOUT */
-
 .layout {
   display: flex;
   flex: 1;
 }
-
-/* SIDEBAR */
 
 .sidebar {
   width: 240px;
@@ -120,8 +106,6 @@ body {
   font-weight: 600;
 }
 
-/* MAIN AREA */
-
 .main {
   flex: 1;
   display: flex;
@@ -131,8 +115,6 @@ body {
 .content {
   padding: 20px;
 }
-
-/* TOOLBAR */
 
 .toolbar {
   display: flex;
@@ -159,8 +141,6 @@ body {
   font-size: 13px;
 }
 
-/* BUTTONS */
-
 .action-btn {
   background: white;
   border: 1px solid #dcdcdc;
@@ -174,8 +154,6 @@ body {
 .action-btn:hover {
   background: #f3f6f9;
 }
-
-/* TABLE */
 
 .table-wrapper {
   background: white;
@@ -223,7 +201,6 @@ table input:focus {
   border-color: #2b7cc2;
   background: white;
 }
-/* RESPONSIVE */
 
 @media (max-width: 900px) {
 
